@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mClient = new TalkToServerRunnable();
 
-        Thread thread = new Thread(mClient);
-
-        thread.start();
-
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         mSensorManager.registerListener(
@@ -129,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+        Thread thread = new Thread(mClient);
+
+        thread.start();
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 2000000);
     }
 
@@ -144,5 +143,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mSensorManager.unregisterListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
         mediaPlayer.release();
     }
-
 }
