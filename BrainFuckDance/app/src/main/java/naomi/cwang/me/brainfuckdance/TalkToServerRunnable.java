@@ -46,7 +46,7 @@ public class TalkToServerRunnable implements Runnable {
             }
             if (out != null && !out.checkError()) {
                 Log.d("Naomi", "DID I HIT THIS 3");
-                out.println(direction);
+                out.print(direction);
                 out.flush();
             }
         }

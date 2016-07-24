@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mediaPlayer = new MediaPlayer();
 
-        mBrainfuckText = (TextView) findViewById(R.id.brainfuck_text);
 
         mClient = new TalkToServerRunnable();
 
