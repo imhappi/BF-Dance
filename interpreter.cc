@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 
     ifstream fileStream;
-    fileStream.open("test1", fstream::in);
+    fileStream.open("test", fstream::in);
 
     int PC = 0;
     char sourceCode[32*1024] = {0};
