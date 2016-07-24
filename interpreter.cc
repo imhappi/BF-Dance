@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 
     ifstream fileStream;
-    fileStream.open("test", fstream::in);
+    fileStream.open("test1", fstream::in);
 
     int PC = 0;
     char sourceCode[32*1024] = {0};
@@ -35,8 +35,6 @@ int main() {
                 break;
         }
     }
-
-    cout << endl << "code: " << endl << sourceCode << endl << endl;;
 
     for (int i = 0; i < PC; i++) {
         char symbol = sourceCode[i];

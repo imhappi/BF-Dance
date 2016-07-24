@@ -8,6 +8,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private MediaPlayer mediaPlayer;
 
     private TalkToServerRunnable mClient;
+
+    private Button mButton;
 
 
     @Override
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 2000000,
                 16667
         );
+
+        mButton = (Button) findViewById(R.id.backspace);
 
     }
 
@@ -69,13 +75,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             mHistory[1] = values[1];
 
             if (Math.abs(xChange) > Math.abs(yChange)) {
-                if (xChange < -11) {
+                if (xChange < -7) {
                     Log.d("Dir", "Left");
                     playSound("Left");
                     mClient.send('l');
                     return;
 
-                } else if (xChange > 11) {
+                } else if (xChange > 7) {
                     Log.d("Dir", "Right");
                     playSound("Right");
                     mClient.send('r');
@@ -83,12 +89,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 }
             } else {
-                if (yChange > 11) {
+                if (yChange > 7) {
                     Log.d("Dir", "Up");
                     playSound("Up");
                     mClient.send('u');
 
-                } else if (yChange < -11) {
+                } else if (yChange < -7) {
                     Log.d("Dir", "Down");
                     playSound("Down");
                     mClient.send('d');
@@ -128,6 +134,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         thread.start();
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 2000000);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mClient.send('b');
+            }
+        });
     }
 
     @Override
